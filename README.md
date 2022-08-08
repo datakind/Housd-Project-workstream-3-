@@ -39,10 +39,10 @@ sh event-siting-all-counties.bash
 To start working on this project, please follow instructions for the following:
 1. (optional) Create a virtual environment
 2. Install all dependencies
-3. Install pre-commit hooks 
+3. Install pre-commit hooks
 4. Run unit tests
 
-## 1. (optional) Create a virtual environment 
+## 1. (optional) Create a virtual environment
 
 pyenv, venv, virtualenv, conda are all good options.
 
@@ -56,7 +56,7 @@ Install dependencies with `pip install -r requirements.txt`.
 
 ### 2.2 Installation with conda
 
-Install dependencies with `conda env create`. 
+Install dependencies with `conda env create`.
 
 > Note: It will automatically detect and install from `environment.yml`. To specify a different conda YAML file, specify the file name with the `-f` flag like so: `conda env create -f <conda-env-yaml>`\
 
