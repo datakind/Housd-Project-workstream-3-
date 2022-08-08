@@ -21,12 +21,17 @@ TODO: Add summary
 # Usage
 
 1. Follow Steps 1 and 2 in `Development Setup` below to install and activate the virtual environment.
-2. Create a config file from the template provided (`configs/template-config.yaml`)
-3. In the root directory of this repo, run the following command, specifying the config file that you created in step 1:
+2. Assemble your input datasets:
+    - Places-of-interest data for potential event sites
+    - Census tract-level data for scoring potential event sites
+    - Census tract-level shapefiles for mapping and visualization
+    - Other visualization files (e.g. road shapefiles)
+3. Create a config file from the template provided (`configs/template-config.yaml`), enter paths to your input datasets, and fill in other parameters
+4. In the root directory of this repo, run the following command, specifying the config file that you created in step 1:
 ```bash
 python3 src/event-siting.py -f <config-file>
 ```
-4. The event siting tool will create a `event-siting-outputs` directory and save results there.
+5. The event siting tool will create a `event-siting-outputs` directory and save results there.
 
 A bash script (`event-siting-all-counties.bash`) and 4 pre-written configs (`configs/*-config.yaml`) have been provided for convenience. When run, the bash script runs the event siting tool for Lake, Orange, Seminole and Osceola counties in Florida. To run the bash script alone:
 
