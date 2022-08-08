@@ -1,0 +1,52 @@
+# Name of the county for file naming purposes
+COUNTY_NAME: "Osceola County"
+
+# Path to the census tract shapefile for this county
+TRACT_PATH: "./data/interim/cleaned_shapefiles/osceola_county_census_tracts.geojson"
+# Name of the variable in TRACT_PATH referring to the GEOID
+TRACT_GEOID_VARNAME: "GEOID"
+
+# Path to the indicator data at the census tract level for this county
+TRACT_DATA_PATH: "./data/processed/Osceola County FEAT Output/data_summaries/housing_loss_summary.csv"
+# Name of the variable in TRACT_DATA_PATH referring to the GEOID
+TRACT_DATA_GEOID_VARNAME: "geoid"
+# Name of the variable in TRACT_DATA_PATH to use as measure of housing loss
+HOUSING_LOSS_VARNAME: "housing-loss-index"
+
+# Path to the POI shapefile for this county
+POI_PATH: "./data/interim/combined_pois.geojson"
+# Name of the variable in POI_PATH referring to poi type
+POI_TYPE_VARNAME: "type"
+# List of types contained in POI_TYPE_VARNAME that are acceptable as event sites
+POI_TYPES:
+  - "library"
+  - "town_hall"
+  - "museum"
+  - "public_building"
+  - "community_centre"
+  - "theatre"
+  - "stadium"
+  - "hotel"
+  - "nonprofit"
+  - "place_of_worship"
+
+# Path to the road shapefile
+ROAD_PATH: "./data/interim/cleaned_shapefiles/fl_primary_roads.geojson"
+
+# Distance around tracts of interest to search for potential event sites
+DISTANCE_RADIUS_M: 16000
+
+# List of variables in TRACT_DATA_PATH positively correlated with housing loss
+POS_CORR_VARS:
+  - "pct-vacant-properties"
+  - "pct-without-health-insurance"
+  - "pct-not-us-citizen"
+# List of variables in TRACT_DATA_PATH negatively correlated with housing loss
+NEG_CORR_VARS:
+  - "education-attained"
+  - "pct-veterans"
+  - "total-owner-occupied-households-mortgage"
+  - "pop-total"
+  - "pct-broadband-internet"
+  - "pct-enrolled-in-school"
+  - "pct-households-married-with-own-children"

@@ -1,0 +1,20 @@
+numpy>=1.19.0
+pandas>=1.2.0
+pyyaml
+adjustText
+matplotlib
+descartes
+usaddress
+usaddress-scourgify
+# needed for geopandas via pip
+fiona
+pyproj
+rtree
+shapely
+geopandas
+# dev dependencies
+notebook
+black
+pytest
+pre-commit
+openpyxl
