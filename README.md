@@ -22,10 +22,10 @@ TODO: Add summary
 
 1. Follow Steps 1 and 2 in `Development Setup` below to install and activate the virtual environment.
 2. Assemble your input datasets:
-    - Places-of-interest data for potential event sites
-    - Census tract-level data for scoring potential event sites
-    - Census tract-level shapefiles for mapping and visualization
-    - Other visualization files (e.g. road shapefiles)
+    - Places-of-interest data for potential event sites (see `example-notebooks/build-poi-dataset.ipynb`)
+    - Census tract-level data for scoring potential event sites, such as the outputs from the [DataKind New America Housing Loss Analysis tool](https://github.com/datakind/new-america-housing-loss-public)
+    - Census tract-level shapefiles for mapping and visualization (see `example-notebooks/filter-county-specific-shapefiles.ipynb`)
+    - Other visualization files (e.g. road shapefiles, see `example-notebooks/create-road-layer.ipynb`)
 3. Create a config file from the template provided (`configs/template-config.yaml`), enter paths to your input datasets, and fill in other parameters
 4. In the root directory of this repo, run the following command, specifying the config file that you created in step 1:
 ```bash
