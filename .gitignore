@@ -1,0 +1,10 @@
+# Data folder
+data/*
+event-siting-outputs/*
+
+# Mac system files
+.DS_Store
+
+# Jupyter notebook files
+*/.ipynb_checkpoints
+*/__pycache__
