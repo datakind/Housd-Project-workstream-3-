@@ -1,6 +1,6 @@
 # Event Siting Tool developed for Housd and Bright Community Trust
 
-TODO: Add summary
+A python-based tool to identify and rank potential sites where Housd and Bright Community Trust might hold community outreach events.
 
 # What's in this repo?
 
