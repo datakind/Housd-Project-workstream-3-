@@ -1,0 +1,42 @@
+---
+title: "Event Siting Output Maps"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+library(flexdashboard)
+library(sf)
+library(mapview)
+library(tidyverse)
+library(DT)
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Potential Event Sites by Score
+
+```{r}
+event_site_path <- "../event-siting-outputs/d6d0de1349b747f5ad584ce1cdb7e97b-Lake County/potential_event_sites.geojson"
+df <- st_read(event_site_path, quiet = TRUE)
+mapview(df, zcol = "event_score")
+```
+
+Column {data-width=500}
+-----------------------------------------------------------------------
+
+### Event Siting Method
+
+```{r}
+df_table <- as.data.frame(df) %>%
+  dplyr::select(name, type, address, website, phone_number, event_score) %>%
+  mutate(event_score = round(event_score, 2))
+
+DT::datatable(df_table,
+              rownames = FALSE,
+              options = list(pageLength = 25, scrollX = TRUE),
+              class = 'white-space: nowrap' )
+```

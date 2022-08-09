@@ -8,3 +8,4 @@ event-siting-outputs/*
 # Jupyter notebook files
 */.ipynb_checkpoints
 __pycache__/
+.Rproj.user
