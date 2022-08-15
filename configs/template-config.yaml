@@ -20,9 +20,6 @@ POI_TYPE_VARNAME:
 # List of types contained in POI_TYPE_VARNAME that are acceptable as event sites
 POI_TYPES:
 
-# Path to the road shapefile
-ROAD_PATH:
-
 # Distance around tracts of interest to search for potential event sites
 DISTANCE_RADIUS_M:
 

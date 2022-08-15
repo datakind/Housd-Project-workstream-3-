@@ -44,7 +44,6 @@ class EventSitingModel:
         poi_path: str,
         poi_type_varname: str,
         poi_types: list[str],
-        road_path: str,
         distance_radius_m: int,
         tract_positive_correlation_vars: list[str],
         tract_negative_correlation_vars: list[str],
@@ -60,7 +59,6 @@ class EventSitingModel:
         self._tract_data_path = tract_data_path
         self._poi_path = poi_path
         self._grid_path = grid_path
-        self._road_path = road_path
 
         # Save names of columns in data sources to reference later
         self._housing_loss_varname = housing_loss_varname
@@ -155,12 +153,6 @@ class EventSitingModel:
         self.pois = self.pois[self.pois[self._poi_type_varname].isin(self.poi_types)]
         self.pois._name = "pois"
 
-        # Load county roads data and filter down to selected types
-        all_roads = gpd.read_file(self._road_path)
-        self.roads = all_roads.sjoin(self.tracts[["geometry"]].dissolve())
-        self.roads.drop(columns=["index_right"], inplace=True)
-        self.roads._name = "roads"
-
         # Load or create grid
         if self._grid_path is None:
             self.grid = create_grid(self.tracts, size_in_meters=1000)
@@ -176,7 +168,7 @@ class EventSitingModel:
             target_epsg (int, optional): EPSG code for the projection under which
                 to standardize all spatial files. Defaults to 4326.
         """
-        for gdf in [self.tracts, self.pois, self.roads, self.grid]:
+        for gdf in [self.tracts, self.pois, self.grid]:
             src_crs = gdf.crs
             if src_crs != target_epsg:
                 print(f"Reprojecting {gdf._name} from {src_crs} to EPSG:{target_epsg}.")
@@ -380,9 +372,6 @@ class EventSitingModel:
         # Plot outlier tracts
         self.housing_outliers.plot(ax=ax, alpha=0.3)
 
-        # Plot roads for reference
-        self.roads.plot(ax=ax, linewidth=2, alpha=0.5)
-
         # Plot selected POI
         self.ranked_pois.head(top_n).plot(ax=ax, color="red", markersize=20)
 
@@ -435,7 +424,6 @@ if __name__ == "__main__":
         poi_path=config["POI_PATH"],
         poi_type_varname=config["POI_TYPE_VARNAME"],
         poi_types=config["POI_TYPES"],
-        road_path=config["ROAD_PATH"],
         distance_radius_m=config["DISTANCE_RADIUS_M"],
         tract_positive_correlation_vars=config["POS_CORR_VARS"],
         tract_negative_correlation_vars=config["NEG_CORR_VARS"],
