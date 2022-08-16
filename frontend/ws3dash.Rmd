@@ -1,9 +1,7 @@
 ---
-title: "Event Siting Output Maps"
+title: "Central Florida Event Siting Tool Output"
 output:
-  flexdashboard::flex_dashboard:
-    orientation: columns
-    vertical_layout: fill
+  flexdashboard::flex_dashboard
 ---
 
 ```{r setup, include=FALSE, message=FALSE, warning=FALSE}
@@ -12,31 +10,135 @@ library(sf)
 library(mapview)
 library(tidyverse)
 library(DT)
+library(here)
+```
+
+
+Orange County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Orange County Event Site Map
+
+```{r}
+dat_orange <- st_read(here("potential_event_sites_Orange.geojson"), quiet = TRUE)
+Orange_County <- dat_orange %>% arrange(desc(event_score)) %>% 
+                 mutate(event_score = round(event_score, 2)) %>% slice_head(n = 100)
+mapview(Orange_County, zcol = "event_score", layer.name = "Event Score")
 ```
 
 Column {data-width=500}
------------------------------------------------------------------------
+-------------------------------------
 
-### Potential Event Sites by Score
-
-```{r}
-event_site_path <- "../event-siting-outputs/d6d0de1349b747f5ad584ce1cdb7e97b-Lake County/potential_event_sites.geojson"
-df <- st_read(event_site_path, quiet = TRUE)
-mapview(df, zcol = "event_score")
-```
-
-Column {data-width=500}
------------------------------------------------------------------------
-
-### Event Siting Method
+### Orange County Event Site Data
 
 ```{r}
-df_table <- as.data.frame(df) %>%
-  dplyr::select(name, type, address, website, phone_number, event_score) %>%
-  mutate(event_score = round(event_score, 2))
+d2 <- as.data.frame(Orange_County) %>% 
+      dplyr::select(name, type, event_score, address, website, phone_number) %>%
+      mutate(event_score = round(event_score, 2))
 
-DT::datatable(df_table,
-              rownames = FALSE,
-              options = list(pageLength = 25, scrollX = TRUE),
+DT::datatable(d2, rownames = FALSE, options = list(pageLength = 25, scrollX = TRUE), 
               class = 'white-space: nowrap' )
 ```
+
+
+Osceola County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Osceola County Event Site Map
+
+```{r}
+dat_osceola <- st_read(here("potential_event_sites_Osceola.geojson"), quiet = TRUE)
+Osceola_County <- dat_osceola %>% arrange(desc(event_score)) %>% 
+                  mutate(event_score = round(event_score, 2)) %>% slice_head(n = 100)
+mapview(Osceola_County, zcol = "event_score", layer.name = "Event Score")
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Osceola County Event Site Data
+
+```{r}
+d3 <- as.data.frame(Osceola_County) %>% 
+      dplyr::select(name, type, event_score, address, website, phone_number) %>%
+      mutate(event_score = round(event_score, 2))
+
+DT::datatable(d3, rownames = FALSE, options = list(pageLength = 25, scrollX = TRUE), 
+              class = 'white-space: nowrap' )
+
+```
+
+
+Lake County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Lake County Event Site Map
+
+```{r}
+dat_lake <- st_read(here("potential_event_sites_Lake.geojson"), quiet = TRUE)
+Lake_County <- dat_lake %>% arrange(desc(event_score)) %>% 
+               mutate(event_score = round(event_score, 2)) %>% slice_head(n = 100)
+mapview(Lake_County, zcol = "event_score", layer.name = "Event Score")
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Lake County Event Site Data
+
+```{r}
+d4 <- as.data.frame(Lake_County) %>% 
+      dplyr::select(name, type, event_score, address, website, phone_number) %>%
+      mutate(event_score = round(event_score, 2))
+
+DT::datatable(d4, rownames = FALSE, options = list(pageLength = 25, scrollX = TRUE), 
+              class = 'white-space: nowrap' )
+
+```
+
+
+Seminole County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Seminole County Event Site Map
+
+```{r}
+dat_seminole <- st_read(here("potential_event_sites_Seminole.geojson"), quiet = TRUE)
+Seminole_County <- dat_seminole %>% arrange(desc(event_score)) %>% 
+                   mutate(event_score = round(event_score, 2)) %>% slice_head(n = 100)
+mapview(Seminole_County, zcol = "event_score", layer.name = "Event Score")
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Seminole County Event Site Data
+
+```{r}
+d5 <- as.data.frame(Seminole_County) %>% 
+      dplyr::select(name, type, event_score, address, website, phone_number) %>%
+      mutate(event_score = round(event_score, 2))
+
+DT::datatable(d5, rownames = FALSE, options = list(pageLength = 25, scrollX = TRUE), 
+              class = 'white-space: nowrap' )
+
+```
+
+
+
+
+
+
+
