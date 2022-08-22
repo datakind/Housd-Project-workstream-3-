@@ -1,0 +1,170 @@
+---
+title: "Central Florida Event Siting Tool Output"
+output:
+  flexdashboard::flex_dashboard
+---
+
+```{r setup, include=FALSE, message=FALSE, warning=FALSE}
+library(flexdashboard)
+library(sf)
+library(mapview)
+library(tidyverse)
+library(DT)
+library(here)
+```
+
+```{r setup-parameters}
+# Set up main mapping parameters here
+
+# how many points to display on the map
+MAP_SITES_TO_DISPLAY <- 100
+# how many rows to display on the table
+TABLE_SITES_TO_DISPLAY <- 25
+# how many decimals to round the event score to
+EVENT_SCORE_NUM_DECIMALS <- 2
+```
+
+```{r setup-functions}
+# Mapping and table display functions defined below
+# These functions are used for every county
+
+show_map <- function(df) {
+  #' Takes a dataframe-like object, filters points to disply and renders a map
+  #'
+  #' @param df The data to plot on a map
+
+  # Filter sites to display
+  county_data <- df %>%
+    slice_head(n = MAP_SITES_TO_DISPLAY)
+
+  # Render map
+  mapview(county_data, zcol = "event_score", layer.name = "Event Score")
+}
+
+
+show_table <- function(df) {
+  #' Takes a dataframe-like object, formats contents and renders a table
+  #'
+  #' @param df The data to display as a table
+
+  # Select table attributes to display, round long decimals and sort rows
+  county_table <- df %>%
+    dplyr::select(name, type, event_score, address, website, phone_number) %>%
+    dplyr::mutate(event_score = round(event_score, EVENT_SCORE_NUM_DECIMALS)) %>%
+    arrange(desc(event_score))
+
+  # Render table
+  DT::datatable(county_table,
+                rownames = FALSE,
+                options = list(pageLength = TABLE_SITES_TO_DISPLAY , scrollX = TRUE),
+                class = 'white-space: nowrap')
+}
+```
+
+
+Orange County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Orange County Event Site Map
+
+```{r}
+# Load data
+orange_path <- here("event-siting-outputs", "9950bc914ed14f4ba2d49ea9de66b7ca-Orange County", "potential_event_sites.geojson")
+dat_orange <- sf::st_read(orange_path, quiet = TRUE)
+
+# Plot data
+show_map(dat_orange)
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Orange County Event Site Data
+
+```{r}
+show_table(dat_orange)
+```
+
+
+Osceola County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Osceola County Event Site Map
+
+```{r}
+# Load data
+osceola_path <- here("event-siting-outputs", "4f0690fe947a4e2ca686312bbb295655-Osceola County", "potential_event_sites.geojson")
+dat_osceola <- sf::st_read(osceola_path, quiet = TRUE)
+
+# Plot data
+show_map(dat_osceola)
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Osceola County Event Site Data
+
+```{r}
+show_table(dat_osceola)
+```
+
+
+Lake County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Lake County Event Site Map
+
+```{r}
+# Load data
+lake_path <- here("event-siting-outputs", "d49c6edf52de444186bdcff70a123fb6-Lake County", "potential_event_sites.geojson")
+dat_lake <- sf::st_read(lake_path, quiet = TRUE)
+
+# Plot data
+show_map(dat_lake)
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Lake County Event Site Data
+
+```{r}
+show_table(dat_lake)
+```
+
+
+Seminole County
+=====================================
+
+Column {data-width=500}
+-------------------------------------
+
+### Seminole County Event Site Map
+
+```{r}
+# Load data
+seminole_path <- here("event-siting-outputs", "1b94ea5c52ed4ce38529306f3706cead-Seminole County", "potential_event_sites.geojson")
+dat_seminole <- sf::st_read(seminole_path, quiet = TRUE)
+
+# Plot data
+show_map(dat_seminole)
+```
+
+Column {data-width=500}
+-------------------------------------
+
+### Seminole County Event Site Data
+
+```{r}
+show_table(dat_seminole)
+```

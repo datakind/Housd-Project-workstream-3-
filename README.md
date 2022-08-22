@@ -11,7 +11,9 @@ A python-based tool to identify and rank potential sites where Housd and Bright 
 ├── data - put input data here
 ├── environment.yml - conda environment file
 ├── event-siting-all-counties.bash - helper script to run event siting tool for 4 Florida counties
-├── notebooks - example jupyter notebooks demonstrating workflows
+├── example-notebooks - example jupyter notebooks demonstrating workflows
+├── frontend - R scripts to generate a quick HTML dashboard
+├── housd-public.Rproj - RProject file
 ├── pytest.ini - pytest configuration file
 ├── requirements.txt - pip environment file
 ├── src - main project code
@@ -37,6 +39,18 @@ A bash script (`event-siting-all-counties.bash`) and 4 pre-written configs (`con
 ```bash
 sh event-siting-all-counties.bash
 ```
+
+# Generating a dashboard
+
+Included in the repo is `frontend/ws3dash.Rmd`, a quick RMarkdown script to generate a two-pane dashboard that visualizes the event siting model outputs.
+
+To generate the dashboard:
+1. Open the `housd-public.Rproj` file in RStudio, then open the `ws3dash.Rmd` file once RStudio has launched
+2. If necessary, install all dependencies shown in the `setup` cell
+3. Change the path to `event_site_path` in the second cell to the location of the `geojson` output file you would like to visualize
+4. In RStudio, click the `Knit` button
+
+This generates `ws3dash.html`, a HTML file that you can view in your browser. The left pane shows a map of all potential sites, colored by event score. The right pane shows a table of the top 25 sites.
 
 # Development Setup
 
