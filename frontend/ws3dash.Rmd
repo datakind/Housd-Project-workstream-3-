@@ -35,6 +35,7 @@ show_map <- function(df) {
 
   # Filter sites to display
   county_data <- df %>%
+    dplyr::mutate(event_score = round(event_score, EVENT_SCORE_NUM_DECIMALS)) %>%
     arrange(desc(event_score)) %>% 
     slice_head(n = MAP_SITES_TO_DISPLAY)
 
