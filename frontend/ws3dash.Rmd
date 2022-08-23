@@ -49,6 +49,7 @@ show_table <- function(df) {
 
   # Select table attributes to display, round long decimals and sort rows
   county_table <- df %>%
+    as.data.frame() %>%
     dplyr::select(name, type, event_score, address, website, phone_number) %>%
     dplyr::mutate(event_score = round(event_score, EVENT_SCORE_NUM_DECIMALS)) %>%
     arrange(desc(event_score))
