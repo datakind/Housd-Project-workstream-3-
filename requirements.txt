@@ -18,3 +18,8 @@ black
 pytest
 pre-commit
 openpyxl
+# for geocoding utility
+import requests
+import concurrent.futures as cf
+import multiprocessing
+from collections import deque
